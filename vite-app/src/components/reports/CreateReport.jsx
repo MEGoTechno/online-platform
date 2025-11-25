@@ -20,10 +20,10 @@ function CreateReport({ course = '' }) {
     const [open, setOpen] = useState(false)
 
     const tabs = [
-        // {
-        //     value: 0, label: 'ارسال تقرير', component: <ReportCompo
-        //         course={course} excludedUsers={excludedUsers} />,
-        // },
+        {
+            value: 0, label: 'ارسال تقرير', component: <ReportCompo
+                course={course} excludedUsers={excludedUsers} />,
+        },
         {
             value: 1, label: 'ارسال رسائل', component: <MessagesCompo
                 course={course} excludedUsers={excludedUsers}  />,
@@ -42,7 +42,7 @@ function CreateReport({ course = '' }) {
                         <CourseName course={course} title={'اسم الكورس : '} />
                     )}
 
-                    <TabsAutoStyled defaultVal={1} originalTabs={tabs} />
+                    <TabsAutoStyled originalTabs={tabs} />
 
                     {/* <TitleWithDividers title={isExcluded ? 'استثناء الطلاب' : 'ارسال لطلاب المختارين'} /> */}
 
