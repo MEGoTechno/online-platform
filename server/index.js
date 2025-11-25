@@ -78,7 +78,7 @@ app.use('/api/get-ip', (req, res, next) => {
 })
 // 'http://localhost:3000', , 'https://www. .com' 'http://192.168.1.16:3000',
 
-const origin = ['https://online-platform.vercel.app']
+const origin = ['https://online-platform-one.vercel.app']
 process.env.NODE_ENV === 'development' && origin.push(...['http://192.168.1.11:3000', 'http://localhost:3000', 'http://192.168.1.13:3000'])
 
 app.use(cors(
