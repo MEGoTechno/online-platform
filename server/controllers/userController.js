@@ -52,6 +52,7 @@ const userParams = (query) => {
         { key: "personalFacebook", value: query.personalFacebook },
         { key: "youtube", value: query.youtube },
         { key: "notes", value: query.notes },
+        { key: "order", value: query.order },
 
     ]
 } //modify it to be more frontend
@@ -163,6 +164,7 @@ const updateUser = asyncHandler(async (req, res, next) => {
     user.devicesAllowed = devicesAllowed || user.devicesAllowed
     user.devicesRegistered = devicesRegistered || user.devicesRegistered
     user.government = government || user.government
+    user.order = order ?? user.order
 
     if ((user.role !== user_roles.ADMIN || user.role !== user_roles.SUBADMIN) && (role === user_roles.ADMIN || role === user_roles.SUBADMIN)) return next(createError('لا يمكن تغيير حاله المستخدم الي ادمن او مشرف'))
 

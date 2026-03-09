@@ -68,7 +68,8 @@ const userSchema = new mongoose.Schema({
     facebookPage: String,
     personalFacebook: String,
     youtube: String,
-    notes: String
+    notes: String,
+    order: Number,
 }, {
     timestamps: true,
     versionKey: false

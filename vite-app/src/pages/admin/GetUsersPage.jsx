@@ -155,6 +155,14 @@ function GetUsersPage({ setExcludedUsers, isShowTitle = true, courses, isShowGra
                         </Section>
                     </BtnModal>
                 }
+            }, {
+                name: 'order',
+                label: 'order',
+                type: 'number',
+
+                field: 'order',
+                headerName: 'order',
+                editable: true
             },
         ] : []
     }, [user])
