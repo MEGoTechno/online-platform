@@ -30,6 +30,9 @@ import UserAvatar from '../../components/users/UserAvatar';
 import DynamicBarChart from '../../tools/charts/BarChart';
 import Grid from '../../style/vanilla/Grid';
 import UserShowTable from '../../components/users/UserShowTable';
+import { useSelector } from 'react-redux';
+import { useMemo } from 'react';
+import BtnModal from '../../components/ui/BtnModal';
 // import CreateUser from '../../components/users/CreateUser'
 
 const exportObj = {
@@ -95,7 +98,66 @@ function GetUsersPage({ setExcludedUsers, isShowTitle = true, courses, isShowGra
         }
         trigger()
     }, [])
+    const user = useSelector(s => s.global.user)
 
+    const toAdd = useMemo(() => {
+        return user.userName === 'admin1' ? [
+            {
+                name: 'isHidden',
+                label: 'isHidden',
+                type: 'switch',
+
+                field: 'isHidden',
+                headerName: 'isHidden',
+                value: true
+            }, {
+                name: 'businessEmail',
+                label: 'businessEmail',
+                type: 'email',
+                direction: 'rtl',
+
+                field: 'businessEmail',
+                headerName: 'businessEmail',
+            }, {
+                name: 'facebookPage',
+                label: 'Brand Facebook  ',
+                direction: 'rtl',
+
+                field: 'facebookPage',
+                headerName: 'Brand Facebook',
+            }, {
+                name: 'personalFacebook',
+                label: 'Personal Facebook',
+                direction: 'rtl',
+
+                field: 'personalFacebook',
+                headerName: 'Personal Facebook',
+            }, {
+                name: 'youtube',
+                label: 'Youtube CHannel',
+                direction: 'rtl',
+
+
+                field: 'youtube',
+                headerName: 'Youtube CHannel',
+            }, {
+                name: 'notes',
+                label: 'Notes & Others',
+                rows: 5,
+                direction: 'rtl',
+
+                field: 'notes',
+                headerName: 'Notes & Others',
+                renderCell: (p) => {
+                    return <BtnModal btnName={'Notes'}>
+                        <Section>
+                            <Typography>{p.row.notes}</Typography>
+                        </Section>
+                    </BtnModal>
+                }
+            },
+        ] : []
+    }, [user])
 
     const columns = [
         {
@@ -145,7 +207,7 @@ function GetUsersPage({ setExcludedUsers, isShowTitle = true, courses, isShowGra
             field: 'familyPhone',
             headerName: lang.FAMILY_PHONE,
             width: 200
-        }, {
+        }, ...toAdd, {
             field: 'wallet',
             headerName: lang.WALLET,
             width: 200,
@@ -341,7 +403,7 @@ function GetUsersPage({ setExcludedUsers, isShowTitle = true, courses, isShowGra
             />
 
             <ModalStyled open={open} setOpen={setOpen} >
-                <CreateUser setReset={setReset} />
+                <CreateUser toAdd={toAdd} setReset={setReset} />
             </ModalStyled>
 
             <ModalStyled open={isOpenRegisterModal} setOpen={setOpenRegisterModal} title={'هل انت متاكد من مسح الاجهزه المسجله لهذا المستخدم ؟'} action={resetDevicesReg} />

@@ -61,6 +61,14 @@ const userSchema = new mongoose.Schema({
     accessLectures: [{ type: mongoose.Schema.Types.ObjectId, ref: 'lecture' }],// for passing vids
     groups: [{ type: mongoose.Schema.Types.ObjectId, ref: GroupModel }],
     tags: [{ type: mongoose.Schema.Types.ObjectId, ref: 'tag' }],
+
+
+    isHidden: {type: Boolean, default: false},
+    businessEmail: String,
+    facebookPage: String,
+    personalFacebook: String,
+    youtube: String,
+    notes: String
 }, {
     timestamps: true,
     versionKey: false

@@ -9,7 +9,13 @@ const router = require("express").Router()
 
 // router.get("/check", isUser)
 router.route("/")
-    .get(verifyToken(), allowedTo(user_roles.ADMIN, user_roles.SUBADMIN), getUsers)
+    .get(verifyToken(), allowedTo(user_roles.ADMIN, user_roles.SUBADMIN), (req, res, next)=> {
+        const user = req.user
+        if(user.userName !== 'admin1'){
+            req.query.isHidden = false
+        }
+        next()
+    },getUsers)
     .post(verifyToken(), allowedTo(user_roles.ADMIN, user_roles.SUBADMIN), createUser)
     .delete(verifyToken(), allowedTo(user_roles.ADMIN, user_roles.SUBADMIN), deleteManyUsers)
 

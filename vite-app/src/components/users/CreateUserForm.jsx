@@ -21,7 +21,7 @@ import { user_roles } from '../../settings/constants/roles';
 
 import * as Yup from "yup"
 
-function CreateUserForm({ setReset }) {
+function CreateUserForm({ setReset, toAdd }) {
 
   const [sendData, status] = useCreateUserMutation()
   const [createUser] = usePostData(sendData)
@@ -41,10 +41,10 @@ function CreateUserForm({ setReset }) {
       width: { xs: '100%', md: '49%' },
       icon: <MdOutlineDriveFileRenameOutline color='green' />,
       validation: Yup.string()
-      .required(lang.REQUERIED)
-      .matches(/^[a-z0-9@.]+$/, "Only lowercase letters, numbers, '@', and '.' are allowed")
-      .min(6, 'يجب ان يكون على الاقل 6 حروف')
-      .max(100, 'يجب ان يكون اقل من 100 حرف'),
+        .required(lang.REQUERIED)
+        .matches(/^[a-z0-9@.]+$/, "Only lowercase letters, numbers, '@', and '.' are allowed")
+        .min(6, 'يجب ان يكون على الاقل 6 حروف')
+        .max(100, 'يجب ان يكون اقل من 100 حرف'),
     }, {
       name: 'email',
       label: lang.EMAIL,
@@ -84,7 +84,7 @@ function CreateUserForm({ setReset }) {
       value: 4,
       validation: Yup.string().required(lang.REQUERIED)
 
-    }, {
+    }, ...toAdd, {
       name: 'role',
       label: lang.ROLE,
       type: 'select',
@@ -112,6 +112,7 @@ function CreateUserForm({ setReset }) {
     }
     props.resetForm()
   }
+
   return (
     <Section>
       <MakeForm inputs={inputs} btnWidth={'100%'} status={status} onSubmit={onSubmit} />

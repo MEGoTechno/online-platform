@@ -45,6 +45,14 @@ const userParams = (query) => {
         { key: "lectures", value: query.lectures, type: "array" },
         { key: "accessLectures", value: query.accessLectures },
         { key: "createdAt", value: query.createdAt },
+
+        { key: "isHidden", value: query.isHidden },
+        { key: "businessEmail", value: query.businessEmail },
+        { key: "facebookPage", value: query.facebookPage },
+        { key: "personalFacebook", value: query.personalFacebook },
+        { key: "youtube", value: query.youtube },
+        { key: "notes", value: query.notes },
+
     ]
 } //modify it to be more frontend
 
