@@ -139,7 +139,7 @@ const createUser = asyncHandler(async (req, res, next) => {
 const updateUser = asyncHandler(async (req, res, next) => {
 
     const id = req.params.id
-    const { grade, name, userName, email, password, phone, familyPhone, isActive, role, government, devicesAllowed, devicesRegistered } = req.body
+    const { grade, name, userName, email, password, phone, familyPhone, isActive, role, government, devicesAllowed, devicesRegistered,order } = req.body
 
     const user = await UserModel.findById(id) //.select(select) populate
     if (!user) return next(createError("No users found ..!", 404, statusTexts.FAILED))
