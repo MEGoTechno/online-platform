@@ -108,7 +108,6 @@ function ExportAsPdf({
                 theme: 'striped',
                 styles: {
                     halign: 'right', // Right-to-right alignment for Arabic
-                    cellPadding: 1, //for padding
                 },
                 headStyles: {
                     halign: 'right',
@@ -119,7 +118,7 @@ function ExportAsPdf({
                     font: 'Amiri' // Align the body text to the right
                 },
                 tableWidth: 'auto', // Ensures table width is automatically calculated
-                direction: 'rtl',
+                direction: 'rtl'
             });
 
             doc.save(arabicText);
