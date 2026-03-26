@@ -108,7 +108,7 @@ function ExportAsPdf({
                 theme: 'striped',
                 styles: {
                     halign: 'right', // Right-to-right alignment for Arabic
-                    cellPadding: columns.some(col => col.qrcode) ? 5 : 1, //for padding
+                    cellPadding: 1, //for padding
                 },
                 headStyles: {
                     halign: 'right',
@@ -120,24 +120,6 @@ function ExportAsPdf({
                 },
                 tableWidth: 'auto', // Ensures table width is automatically calculated
                 direction: 'rtl',
-                didDrawCell: (data) => {
-                    if (data.section !== "body") return;
-                    const colIndex = data.column.index;
-                    const rowIndex = data.row.index;
-                    // const colDef = data.column; // get original column
-
-                    // const column = selectedColumnsData[colDef.index]
-                    const fieldIndex = selectedColumnsData.length - 1 - colIndex;
-                    const column = selectedColumnsData[fieldIndex];
-                    if (!column || !column.qrcode) return;
-
-                    const qrImage = modifiedRows[rowIndex][column.field]; // already base64
-                    if (qrImage) {
-                        const { x, y, width, height } = data.cell;
-                        const qrSize = Math.min(width, height) - 4; // fit inside cell
-                        doc.addImage(qrImage, "PNG", x + 2, y + 2, qrSize, qrSize);
-                    }
-                }
             });
 
             doc.save(arabicText);
